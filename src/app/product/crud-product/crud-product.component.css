@@ -1,0 +1,9 @@
+.closeButton{
+    float: right;
+}
+.tittle {
+    padding-bottom: 15px;
+}
+.parent-form > * {
+    padding-bottom: 10px;
+}

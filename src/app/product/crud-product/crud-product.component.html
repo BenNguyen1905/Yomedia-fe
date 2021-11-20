@@ -1,0 +1,72 @@
+<div>
+    <div class="closeButton">
+        <button class="fix-button" mat-icon-button (click)="close()">
+            <mat-icon>cancel</mat-icon>
+        </button>
+    </div>
+</div>
+<div class="tittle">
+    <mat-card-title class="card-header text-center" *ngIf="isView">
+        Product detail page
+    </mat-card-title>
+    <mat-card-title class="card-header text-center" *ngIf="isCreate">
+        Add product page
+    </mat-card-title>
+    <mat-card-title class="card-header text-center" *ngIf="!isView && !isCreate">
+        Edit product's information page
+    </mat-card-title>
+</div>
+
+<mat-card>
+    <form fxLayoutAlign="stretch" fxLayout="column" class="parent-form" name="form" novalidate (ngSubmit)="f.form.valid && create()" #f="ngForm">
+
+        <mat-form-field class="input-fluid" appearance="outline">
+            <mat-label>Name</mat-label>
+            <input id="name" [(ngModel)]="sourceView.name" name="name" #name="ngModel" matInput placeholder="Tên"
+                [disabled]="isView" required minlength="3" maxlength="255">
+            <mat-error *ngIf="f.submitted && name.invalid">Name required.
+            </mat-error>
+            <mat-error *ngIf="name.errors?.['minlength']">Name must be at least 3 characters long..
+            </mat-error>
+        </mat-form-field>
+
+
+        <mat-form-field class="input-fluid" appearance="outline">
+            <mat-label>SKU</mat-label>
+            <input id="sku" [(ngModel)]="sourceView.sku" name="sku" #sku="ngModel" matInput placeholder="SKU"
+                [disabled]="isView" required minlength="10" maxlength="10"> 
+            <mat-error *ngIf="f.submitted && sku.invalid">SKU required
+            </mat-error>
+            <mat-error *ngIf="sku.errors?.['minlength']">SKU must be 10 characters long..
+            </mat-error>
+        </mat-form-field>
+
+
+
+        <mat-form-field class="input-fluid" appearance="outline">
+            <mat-label>Price</mat-label>
+            <input id="price" type="number" [(ngModel)]="sourceView.price" name="price" #price="ngModel" matInput placeholder="Price"
+                [disabled]="isView" required min="1">
+            <mat-error *ngIf="f.submitted && price.invalid">Price required
+            </mat-error>
+            <mat-error *ngIf="price.errors?.['min']">Price must be greater than 0..
+            </mat-error>
+        </mat-form-field>
+
+
+        <div style="margin:0 auto;text-align: center;">
+            <button mat-raised-button class="btn btn-outline-success" type="submit" *ngIf="isCreate">
+                <mat-icon>add</mat-icon>ADD
+            </button>
+        </div>
+    </form>
+    <div fxLayoutAlign="stretch" fxLayout="row" fxLayoutAlign="center center" >
+        <button type="button" mat-raised-button *ngIf="isView" (click)="delete()">Delete</button>
+        <button type="button" mat-raised-button *ngIf="!isView && !isCreate"
+            (click)="discard()">Discard</button>
+        <button type="button" mat-raised-button *ngIf="!isView && !isCreate"
+            (click)="save()">Save</button>
+        <button type="button" mat-raised-button *ngIf="isView"
+            (click)="edit()">Edit</button>
+    </div>
+</mat-card>
