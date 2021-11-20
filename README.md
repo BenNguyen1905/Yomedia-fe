@@ -9,7 +9,7 @@ Step 1: Run `npm install`
 
 Step 2: Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-Admin page:
--username: Admin
--password: 123456
+Admin page: <br/>
+-username: Admin<br/>
+-password: 123456<br/>
 
